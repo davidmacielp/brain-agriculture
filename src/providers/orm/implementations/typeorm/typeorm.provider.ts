@@ -1,23 +1,27 @@
+import { TypeOrmAdmin } from "@modules/admins/implementations/typeorm/entities/typeorm-admin";
 import { OrmProvider } from "@providers/orm/contracts/interfaces/orm.provider";
 import { DataSource } from "typeorm";
 
 export class TypeOrmProvider implements OrmProvider {
-  connect(): void {
-    const appDataSource = new DataSource({
+  appDataSource: DataSource;
+  async connect(): Promise<void> {
+    this.appDataSource = new DataSource({
       type: "postgres",
       host: "localhost",
       port: 5432,
       username: "postgres",
       password: "postgres",
       database: "agriculture",
-      entities: [],
+      entities: [TypeOrmAdmin],
       synchronize: true,
-      logging: true,
+      logging: false,
     });
 
-    appDataSource
-      .initialize()
-      .then(() => console.log(`Database is launched`))
-      .catch((error) => console.log(error));
+    try {
+      await this.appDataSource.initialize();
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("Database is launched");
   }
 }

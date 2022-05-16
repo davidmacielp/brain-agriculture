@@ -6,12 +6,12 @@ import { errorHandler } from "./middlewares/error-handler";
 import { router } from "./router";
 import { container } from "tsyringe";
 import { OrmProvider } from "@providers/orm/contracts/interfaces/orm.provider";
-import "../../providers/index";
+import "../../providers/container";
 
-const start = () => {
+const start = async () => {
   const ormProvider = container.resolve<OrmProvider>("OrmProvider");
 
-  ormProvider.connect();
+  await ormProvider.connect();
 
   const app = express();
 

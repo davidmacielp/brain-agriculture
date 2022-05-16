@@ -1,3 +1,3 @@
 export interface OrmProvider {
-  connect(): void;
+  connect(): Promise<void>;
 }
