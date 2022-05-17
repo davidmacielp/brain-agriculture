@@ -1,5 +1,6 @@
 import { Admin } from "@modules/admins/contracts/entities/admin";
 import { CreateAdminDto } from "@modules/admins/contracts/interfaces/create-admin.dto";
+import { FindAdminDto } from "@modules/admins/contracts/interfaces/find-admin.dto";
 import { AdminsRepository } from "@modules/admins/contracts/repositories/admin.repository";
 import { TypeOrmProvider } from "@providers/orm/implementations/typeorm/typeorm.provider";
 import { container } from "tsyringe";
@@ -14,6 +15,10 @@ export class TypeOrmAdminsRepository implements AdminsRepository {
     const admin = new TypeOrmAdmin(data);
 
     return admin;
+  }
+
+  findOne(data: FindAdminDto): Promise<Admin> {
+    throw new Error("Method not implemented.");
   }
 
   async save(data: Admin): Promise<void> {
