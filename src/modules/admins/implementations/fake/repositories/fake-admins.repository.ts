@@ -23,7 +23,7 @@ export class FakeAdminsRepository implements AdminsRepository {
     return admin;
   }
 
-  save(): Promise<void> {
-    return Promise.resolve();
+  async save(data: Admin): Promise<void> {
+    this.admins.push(data);
   }
 }

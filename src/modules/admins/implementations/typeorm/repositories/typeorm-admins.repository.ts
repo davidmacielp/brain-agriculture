@@ -17,8 +17,13 @@ export class TypeOrmAdminsRepository implements AdminsRepository {
     return admin;
   }
 
-  findOne(data: FindAdminDto): Promise<Admin> {
-    throw new Error("Method not implemented.");
+  async findOne({ id, email }: FindAdminDto): Promise<Admin | undefined> {
+    const admin = await this.repository.findOneBy({
+      ...(id && { id }),
+      ...(email && { email }),
+    });
+
+    return admin ? admin : undefined;
   }
 
   async save(data: Admin): Promise<void> {

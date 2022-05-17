@@ -5,9 +5,9 @@ import { AppError } from "@shared/server/errors/app.error";
 import { FakeCryptoProvider } from "@providers/crypto/implementations/fake/fake-crypto.provider";
 
 describe("Create Admin", () => {
-  let adminsRepository: FakeAdminsRepository;
   let cryptoProvider: FakeCryptoProvider;
   let createAdminService: CreateAdminService;
+  let adminsRepository: FakeAdminsRepository;
 
   beforeEach(() => {
     adminsRepository = new FakeAdminsRepository();
@@ -18,7 +18,7 @@ describe("Create Admin", () => {
     );
 
     jest.useFakeTimers("modern");
-    jest.setSystemTime(new Date(2020, 3, 3));
+    jest.setSystemTime(new Date(2022, 3, 3));
   });
 
   it("should create an admin", async () => {
@@ -31,8 +31,8 @@ describe("Create Admin", () => {
       id: admin.id,
       email: "fake@email.com",
       password: await cryptoProvider.encrypt("123"),
-      createdAt: new Date(2020, 3, 3),
-      updatedAt: new Date(2020, 3, 3),
+      createdAt: new Date(2022, 3, 3),
+      updatedAt: new Date(2022, 3, 3),
     });
   });
 
