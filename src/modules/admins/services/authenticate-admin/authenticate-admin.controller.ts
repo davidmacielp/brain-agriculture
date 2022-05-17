@@ -1,25 +1,28 @@
 import { celebrate, Joi } from "celebrate";
 import { RequestHandler } from "express";
 import { container } from "tsyringe";
-import { CreateAdminService } from "./create-admin.service";
+import { AuthenticateAdminService } from "./authenticate-admin.service";
 
-export class CreateAdminController {
+export class AuthenticateAdminController {
   static validate = celebrate({
     body: {
       email: Joi.string().email().required(),
       password: Joi.string().required(),
     },
   });
-  static handle: RequestHandler = async (req, res) => {
+
+  static handle: RequestHandler = (req, res) => {
     const { email, password } = req.body;
 
-    const createAdminService = container.resolve(CreateAdminService);
+    const authenticateAdminService = container.resolve(
+      AuthenticateAdminService
+    );
 
-    const admin = await createAdminService.execute({
+    const token = authenticateAdminService.execute({
       email,
       password,
     });
 
-    return res.json(admin);
+    return res.json(token);
   };
 }

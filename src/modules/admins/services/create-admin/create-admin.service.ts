@@ -18,6 +18,7 @@ export class CreateAdminService {
     @inject("CryptoProvider")
     private cryptoProvider: CryptoProvider
   ) {}
+
   async execute({ email, password }: Request): Promise<Admin> {
     const checkEmailIsInUse = await this.adminsRepository.findOne({
       email,
