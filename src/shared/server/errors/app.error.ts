@@ -13,6 +13,22 @@ export class AppError {
     });
   }
 
+  static notAllowed(): AppError {
+    return new AppError({
+      statusCode: 403,
+      errorCode: "NOT_ALLOWED",
+      details: `You're not allowed to do this.`,
+    });
+  }
+
+  static invalidToken(): AppError {
+    return new AppError({
+      statusCode: 401,
+      errorCode: "INVALID_TOKEN",
+      details: "This token is invalid.",
+    });
+  }
+
   static emailInUse(email: string): AppError {
     return new AppError({
       statusCode: 409,
