@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { appConfig } from "@config/app.config";
 import express from "express";
+import "express-async-errors";
 import { createServer } from "http";
 import { errorHandler } from "./middlewares/error-handler";
 import { router } from "./router";

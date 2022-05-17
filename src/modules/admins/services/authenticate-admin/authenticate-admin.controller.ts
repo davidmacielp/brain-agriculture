@@ -11,14 +11,14 @@ export class AuthenticateAdminController {
     },
   });
 
-  static handle: RequestHandler = (req, res) => {
+  static handle: RequestHandler = async (req, res) => {
     const { email, password } = req.body;
 
     const authenticateAdminService = container.resolve(
       AuthenticateAdminService
     );
 
-    const token = authenticateAdminService.execute({
+    const token = await authenticateAdminService.execute({
       email,
       password,
     });

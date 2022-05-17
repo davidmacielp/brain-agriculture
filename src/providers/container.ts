@@ -3,6 +3,7 @@ import { TypeOrmAdminsRepository } from "@modules/admins/implementations/typeorm
 import { container } from "tsyringe";
 import "./orm/index";
 import "./crypto/index";
+import "./token/index";
 
 container.registerSingleton<AdminsRepository>(
   "AdminsRepository",
