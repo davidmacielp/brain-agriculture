@@ -1,5 +1,5 @@
 import { Admin } from "@modules/admins/contracts/entities/admin";
-import { AdminsRepository } from "@modules/admins/contracts/repositories/admin.repository";
+import { AdminsRepository } from "@modules/admins/contracts/repositories/admins.repository";
 import { CryptoProvider } from "@providers/crypto/contracts/interfaces/crypto.provider";
 import { AppError } from "@shared/server/errors/app.error";
 import { inject, injectable } from "tsyringe";

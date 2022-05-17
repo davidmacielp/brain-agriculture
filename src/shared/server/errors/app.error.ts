@@ -13,6 +13,14 @@ export class AppError {
     });
   }
 
+  static adminNotFound(email: string): AppError {
+    return new AppError({
+      statusCode: 404,
+      errorCode: "ADMIN_NOT_FOUND",
+      details: `We can't found an admin with email: ${email}`,
+    });
+  }
+
   static notAllowed(): AppError {
     return new AppError({
       statusCode: 403,
@@ -34,6 +42,14 @@ export class AppError {
       statusCode: 409,
       errorCode: "EMAIL_IN_USE",
       details: `The email ${email} is in use.`,
+    });
+  }
+
+  static invalidEmailAndPasswordCombination(): AppError {
+    return new AppError({
+      statusCode: 401,
+      errorCode: "INVALID_EMAIL_AND_PASSWORD_COMBINATION",
+      details: "Invalid email and password combination.",
     });
   }
 

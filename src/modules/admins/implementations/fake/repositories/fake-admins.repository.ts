@@ -1,7 +1,7 @@
 import { Admin } from "@modules/admins/contracts/entities/admin";
 import { CreateAdminDto } from "@modules/admins/contracts/interfaces/create-admin.dto";
 import { FindAdminDto } from "@modules/admins/contracts/interfaces/find-admin.dto";
-import { AdminsRepository } from "@modules/admins/contracts/repositories/admin.repository";
+import { AdminsRepository } from "@modules/admins/contracts/repositories/admins.repository";
 
 export class FakeAdminsRepository implements AdminsRepository {
   private admins: Admin[] = [];
