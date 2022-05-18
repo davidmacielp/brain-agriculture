@@ -15,7 +15,7 @@ export class TypeOrmRuralProducer implements RuralProducer {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @OneToOne(() => TypeOrmFarm, (farm) => farm.ruralProducerId, {
+  @OneToOne(() => TypeOrmFarm, (farm) => farm.ruralProducer, {
     cascade: true,
   })
   farm: TypeOrmFarm;

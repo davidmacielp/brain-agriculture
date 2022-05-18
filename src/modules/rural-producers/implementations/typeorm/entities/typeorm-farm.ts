@@ -2,6 +2,7 @@ import { TypeOrmCulture } from "@modules/cultures/implementations/typeorm/entiti
 import { Farm } from "@modules/rural-producers/contracts/entities/farm";
 import { Column, Entity, ManyToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { TypeOrmAddress } from "./typeorm-address";
+import { TypeOrmRuralProducer } from "./typeorm-rural-producer";
 
 @Entity()
 export class TypeOrmFarm implements Farm {
@@ -9,10 +10,10 @@ export class TypeOrmFarm implements Farm {
   id: string;
 
   @Column()
-  ruralProducerId: string;
-
-  @Column()
   label: string;
+
+  @OneToOne(() => TypeOrmRuralProducer, (ruralProducer) => ruralProducer.farm)
+  ruralProducer: TypeOrmRuralProducer;
 
   @Column()
   totalArea: number;
@@ -23,7 +24,7 @@ export class TypeOrmFarm implements Farm {
   @Column()
   notUsefulArea: number;
 
-  @OneToOne(() => TypeOrmAddress)
+  @OneToOne(() => TypeOrmAddress, (address) => address.id, { cascade: true })
   address: TypeOrmAddress;
 
   @ManyToMany(() => TypeOrmCulture, (culture) => culture.farms)

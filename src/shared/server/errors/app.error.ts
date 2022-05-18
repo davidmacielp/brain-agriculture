@@ -29,7 +29,7 @@ export class AppError {
     });
   }
 
-  static areaInconsistency(): AppError {
+  static inconsistencyArea(): AppError {
     return new AppError({
       statusCode: 403,
       errorCode: "AREA_INCONSISTENCY",

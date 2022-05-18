@@ -5,7 +5,6 @@ import { Address } from "./address";
 
 export class Farm {
   id: string;
-  ruralProducerId: string;
   label: string;
   totalArea: number;
   usefulArea: number;
@@ -18,7 +17,6 @@ export class Farm {
   constructor(data: CreateFarmDto) {
     if (data) {
       this.id = v4();
-      this.ruralProducerId = data.ruralProducerId;
       this.label = data.label;
       this.totalArea = data.totalArea;
       this.usefulArea = data.usefulArea;
