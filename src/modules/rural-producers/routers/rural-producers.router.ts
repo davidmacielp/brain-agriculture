@@ -7,7 +7,12 @@ const ruralProducersRouter = Router();
 
 ruralProducersRouter.use(adminAuthHandler);
 
-ruralProducersRouter.post("/", CreateRuralProducerController.handle);
+ruralProducersRouter.post(
+  "/",
+  CreateRuralProducerController.validade,
+  CreateRuralProducerController.handle
+);
+
 ruralProducersRouter.get("/", ListRuralProducerController.handle);
 
 export { ruralProducersRouter };
