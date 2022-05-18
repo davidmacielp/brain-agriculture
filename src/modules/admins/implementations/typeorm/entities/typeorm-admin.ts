@@ -1,6 +1,7 @@
 import { Admin } from "@modules/admins/contracts/entities/admin";
 import { CreateAdminDto } from "@modules/admins/contracts/interfaces/create-admin.dto";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { TypeOrmRuralProducer } from "@modules/rural-producers/implementations/typeorm/entities/typeorm-rural-producer";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 } from "uuid";
 
 @Entity("Admin")
@@ -10,6 +11,12 @@ export class TypeOrmAdmin implements Admin {
 
   @Column({ unique: true })
   email: string;
+
+  @OneToMany(
+    () => TypeOrmRuralProducer,
+    (ruralProducer) => ruralProducer.createdBy
+  )
+  ruralProducers: TypeOrmRuralProducer[];
 
   @Column()
   password: string;

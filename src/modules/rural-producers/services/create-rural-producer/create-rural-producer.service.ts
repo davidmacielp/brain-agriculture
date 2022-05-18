@@ -1,4 +1,5 @@
 import { AdminsRepository } from "@modules/admins/contracts/repositories/admins.repository";
+import { CulturesRepository } from "@modules/cultures/contracts/repositories/cultures.repository";
 import { Address } from "@modules/rural-producers/contracts/entities/address";
 import { Farm } from "@modules/rural-producers/contracts/entities/farm";
 import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
@@ -32,7 +33,10 @@ export class CreateRuralProducerService {
     private adminsRepository: AdminsRepository,
 
     @inject("RuralProducersRepository")
-    private ruralProducersRepository: RuralProducersRepository
+    private ruralProducersRepository: RuralProducersRepository,
+
+    @inject("CulturesRepository")
+    private culturesRepository: CulturesRepository
   ) {}
 
   async execute({ adminId, farm, document }: Request): Promise<RuralProducer> {
@@ -45,12 +49,16 @@ export class CreateRuralProducerService {
     if (farm.usefulArea + farm.notUsefulArea > farm.totalArea)
       throw AppError.inconsistencyArea();
 
+    const cultures = farm.cultures
+      ? await this.culturesRepository.find({ adminId, ids: farm.cultures })
+      : [];
+
     const farmAddress = new Address(farm.address);
 
     const newFarm = new Farm({
       ...farm,
       address: farmAddress,
-      cultures: [],
+      cultures,
     });
 
     const ruralProducer = this.ruralProducersRepository.create({

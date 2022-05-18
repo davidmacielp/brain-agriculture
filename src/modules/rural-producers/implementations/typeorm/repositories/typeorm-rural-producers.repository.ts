@@ -26,7 +26,7 @@ export class TypeOrmRuralProducersRepository
       where: {
         createdBy: adminId,
       },
-      relations: ["farm", "farm.address"],
+      relations: ["farm", "farm.address", "farm.cultures"],
     });
 
     return ruralProducers;
@@ -39,7 +39,7 @@ export class TypeOrmRuralProducersRepository
       where: {
         id: data.id,
       },
-      relations: ["farm", "farm.address"],
+      // relations: ["farm", "farm.address", "farm.cultures"],
     });
 
     return ruralProducer ? ruralProducer : undefined;

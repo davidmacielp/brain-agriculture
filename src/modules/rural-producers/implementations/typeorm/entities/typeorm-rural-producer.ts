@@ -1,3 +1,4 @@
+import { TypeOrmAdmin } from "@modules/admins/implementations/typeorm/entities/typeorm-admin";
 import { Document } from "@modules/rural-producers/contracts/dtos/document.dto";
 import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
 import {
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -27,6 +29,11 @@ export class TypeOrmRuralProducer implements RuralProducer {
 
   @Column()
   createdBy: string;
+
+  @ManyToOne(() => TypeOrmAdmin, (admin) => admin.ruralProducers, {
+    cascade: true,
+  })
+  admin: TypeOrmAdmin;
 
   @CreateDateColumn()
   createdAt: Date;

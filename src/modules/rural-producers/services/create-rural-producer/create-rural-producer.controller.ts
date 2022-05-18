@@ -36,7 +36,7 @@ export class CreateRuralProducerController {
           city: Joi.string(),
           state: Joi.string(),
         }).required(),
-        cultures: Joi.array(),
+        cultures: Joi.array().items(Joi.string().uuid()),
       }).required(),
     },
   });

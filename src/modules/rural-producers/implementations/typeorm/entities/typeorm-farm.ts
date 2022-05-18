@@ -4,6 +4,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   OneToOne,
   PrimaryColumn,
@@ -36,6 +37,7 @@ export class TypeOrmFarm implements Farm {
   address: TypeOrmAddress;
 
   @ManyToMany(() => TypeOrmCulture, (culture) => culture.farms)
+  @JoinTable()
   cultures: TypeOrmCulture[];
 
   @Column()
