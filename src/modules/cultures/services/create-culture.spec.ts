@@ -1,4 +1,5 @@
 import { FakeAdminsRepository } from "@modules/admins/implementations/fake/repositories/fake-admins.repository";
+import { AppError } from "@shared/server/errors/app.error";
 import "reflect-metadata";
 import { FakeCulturesRepository } from "../implementations/fake/repositories/fake-cultures.repository";
 import { CreateCultureService } from "./create-culture.service";
@@ -42,18 +43,20 @@ describe("Create Rural Producer", () => {
     });
   });
 
-  // it("should not create an already existing email", async () => {
-  //   const email = "fake@email.com";
-  //   await createAdminService.execute({
-  //     email,
-  //     password: "123",
-  //   });
+  it("should not create if admin doesn't exsist", async () => {
+    const email = "fake@email.com";
+    const admin = adminsRepository.create({
+      email,
+      password: "123",
+    });
 
-  //   await expect(
-  //     createAdminService.execute({
-  //       email,
-  //       password: "123",
-  //     })
-  //   ).rejects.toEqual(AppError.emailInUse(email));
-  // });
+    await adminsRepository.save(admin);
+
+    await expect(
+      createCultureService.execute({
+        adminId: "fake id",
+        label: "Açucar",
+      })
+    ).rejects.toEqual(AppError.notAllowed());
+  });
 });

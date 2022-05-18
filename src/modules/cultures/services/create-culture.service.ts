@@ -22,7 +22,7 @@ export class CreateCultureService {
   async execute({ adminId, label }: Request): Promise<Culture> {
     const admin = await this.adminsRepository.findOne({ id: adminId });
 
-    if (!admin) throw AppError.adminNotFound(adminId);
+    if (!admin) throw AppError.notAllowed();
 
     const culture = this.culturesRepository.create({
       label,
