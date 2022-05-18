@@ -7,5 +7,12 @@ declare namespace NodeJS {
     // Redis Config
     REDIS_HOST: string;
     REDIS_PORT: number;
+
+    // PostgresConfig
+    POSTGRES_DATABASE: string;
+    POSTGRES_HOST: string;
+    POSTGRES_USERNAME: string;
+    POSTGRES_PASSWORD: string;
+    POSTGRES_PORT: number;
   }
 }

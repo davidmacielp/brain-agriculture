@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { FakeAdminsRepository } from "@modules/admins/implementations/fake/repositories/fake-admins.repository";
 import { CreateRuralProducerService } from "./create-rural-producer.service";
 import { FakeRuralProducersRepository } from "@modules/rural-producers/implementations/fake/repositories/fake-rural-producers.repository";
-import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
 
 describe("Create Rural Producer", () => {
   let createRuralProducerService: CreateRuralProducerService;

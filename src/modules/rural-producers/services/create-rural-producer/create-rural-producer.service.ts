@@ -42,6 +42,8 @@ export class CreateRuralProducerService {
 
     if (!admin) throw AppError.adminNotFound(adminId);
 
+    console.log(farm);
+
     if (farm.usefulArea + farm.notUsefulArea > farm.totalArea)
       throw AppError.areaInconsistency();
 
@@ -50,6 +52,8 @@ export class CreateRuralProducerService {
     const newFarm = new Farm({
       ...farm,
       address: farmAddress,
+      ruralProducerId: adminId,
+      cultures: [],
     });
 
     const ruralProducer = this.ruralProducersRepository.create({
