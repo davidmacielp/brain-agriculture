@@ -1,4 +1,5 @@
 import { CreateCultureDto } from "@modules/cultures/contracts/dtos/create-culture.dto";
+import { FindCultureDto } from "@modules/cultures/contracts/dtos/find-cultures.dto";
 import { Culture } from "@modules/cultures/contracts/entities/culture";
 import { CulturesRepository } from "@modules/cultures/contracts/repositories/cultures.repository";
 import { TypeOrmProvider } from "@providers/orm/implementations/typeorm/typeorm.provider";
@@ -13,6 +14,15 @@ export class TypeOrmCulturesRepository implements CulturesRepository {
     this.repository = container
       .resolve<TypeOrmProvider>("OrmProvider")
       .appDataSource.getRepository(TypeOrmCulture);
+  }
+  async find({ adminId }: FindCultureDto): Promise<Culture[]> {
+    const cultures = await this.repository.find({
+      where: {
+        createdBy: adminId,
+      },
+    });
+
+    return cultures;
   }
 
   create(data: CreateCultureDto): Culture {

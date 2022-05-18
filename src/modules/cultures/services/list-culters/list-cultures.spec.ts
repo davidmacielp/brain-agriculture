@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { FakeAdminsRepository } from "@modules/admins/implementations/fake/repositories/fake-admins.repository";
 import { AppError } from "@shared/server/errors/app.error";
-import { ListCulturesService } from "./list-culters.service";
+import { ListCulturesService } from "./list-cultures.service";
 import { FakeCulturesRepository } from "@modules/cultures/implementations/fake/repositories/fake-cultures.repository";
 
 describe("List Cultures", () => {
