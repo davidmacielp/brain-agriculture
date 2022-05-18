@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { FakeAdminsRepository } from "@modules/admins/implementations/fake/repositories/fake-admins.repository";
 import { FakeRuralProducersRepository } from "@modules/rural-producers/implementations/fake/repositories/fake-rural-producers.repository";
-import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
 import { AppError } from "@shared/server/errors/app.error";
 import { ListRuralProducersService } from "./list-rural-producers.service";
 import { Address } from "@modules/rural-producers/contracts/entities/address";

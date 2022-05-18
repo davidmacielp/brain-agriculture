@@ -3,7 +3,7 @@ import { CreateAdminDto } from "@modules/admins/contracts/interfaces/create-admi
 import { Column, Entity, PrimaryColumn } from "typeorm";
 import { v4 } from "uuid";
 
-@Entity()
+@Entity("Admin")
 export class TypeOrmAdmin implements Admin {
   @PrimaryColumn()
   id: string;

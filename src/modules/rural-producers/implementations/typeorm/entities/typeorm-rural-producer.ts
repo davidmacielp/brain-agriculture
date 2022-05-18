@@ -4,13 +4,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { TypeOrmFarm } from "./typeorm-farm";
 
-@Entity()
+@Entity("RuralProducer")
 export class TypeOrmRuralProducer implements RuralProducer {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -18,6 +19,7 @@ export class TypeOrmRuralProducer implements RuralProducer {
   @OneToOne(() => TypeOrmFarm, (farm) => farm.ruralProducer, {
     cascade: true,
   })
+  @JoinColumn()
   farm: TypeOrmFarm;
 
   @Column({ type: "json" })
