@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for rural-producers/services/list-rural-producers/list-rural-producers.service.ts</title>
+    <title>Code coverage report for cultures/services/list-culters/list-culters.service.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">rural-producers/services/list-rural-producers</a> list-rural-producers.service.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">cultures/services/list-culters</a> list-culters.service.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/34</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>34/34</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -97,7 +97,9 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -132,8 +134,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { AdminsRepository } from "@modules/admins/contracts/repositories/admins.repository";
+import { Culture } from "@modules/cultures/contracts/entities/culture";
+import { CulturesRepository } from "@modules/cultures/contracts/repositories/cultures.repository";
 import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
-import { RuralProducersRepository } from "@modules/rural-producers/contracts/repositories/rural-producers.repository";
 import { AppError } from "@shared/server/errors/app.error";
 import { inject, injectable } from "tsyringe";
 &nbsp;
@@ -142,27 +145,27 @@ interface Request {
 }
 &nbsp;
 @injectable()
-export class ListRuralProducersService {
+export class ListCulturesService {
   constructor(
     @inject("AdminsRepository")
     private adminsRepository: AdminsRepository,
 &nbsp;
-    @inject("RuralProducersRepository")
-    private ruralProducersRepository: RuralProducersRepository
+    @inject("CulturesRepository")
+    private culturesRepository: CulturesRepository
   ) {}
 &nbsp;
-  async execute({ adminId }: Request): Promise&lt;RuralProducer[]&gt; {
+  async execute({ adminId }: Request): Promise&lt;Culture[]&gt; {
     const admin = await this.adminsRepository.findOne({
       id: adminId,
     });
 &nbsp;
     if (!admin) throw AppError.notAllowed();
 &nbsp;
-    const ruralProducers = await this.ruralProducersRepository.find({
+    const cultures = await this.culturesRepository.find({
       adminId,
     });
 &nbsp;
-    return ruralProducers;
+    return cultures;
   }
 }
 &nbsp;</pre></td></tr></table></pre>

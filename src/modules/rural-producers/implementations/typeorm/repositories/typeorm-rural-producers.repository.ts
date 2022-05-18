@@ -6,7 +6,6 @@ import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural
 import { RuralProducersRepository } from "@modules/rural-producers/contracts/repositories/rural-producers.repository";
 import { TypeOrmProvider } from "@providers/orm/implementations/typeorm/typeorm.provider";
 import { container } from "tsyringe";
-import { TypeOrmFarm } from "../entities/typeorm-farm";
 import { TypeOrmRuralProducer } from "../entities/typeorm-rural-producer";
 
 export class TypeOrmRuralProducersRepository
@@ -33,11 +32,23 @@ export class TypeOrmRuralProducersRepository
     return ruralProducers;
   }
 
-  findOne(data: FindRuralProducerDto): Promise<RuralProducer | undefined> {
-    throw new Error("Method not implemented.");
+  async findOne(
+    data: FindRuralProducerDto
+  ): Promise<RuralProducer | undefined> {
+    const ruralProducer = await this.repository.findOne({
+      where: {
+        id: data.id,
+      },
+      relations: ["farm", "farm.address"],
+    });
+
+    return ruralProducer ? ruralProducer : undefined;
   }
-  delete(data: DeleteRuralProducerDto): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async delete(data: DeleteRuralProducerDto): Promise<void> {
+    await this.repository.delete({
+      id: data.id,
+    });
   }
 
   async save(data: RuralProducer): Promise<void> {
