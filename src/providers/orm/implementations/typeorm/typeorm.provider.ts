@@ -22,6 +22,6 @@ export class TypeOrmProvider implements OrmProvider {
     } catch (error) {
       console.log(error);
     }
-    console.log("Database is launched");
+    console.log("Connected to the database");
   }
 }

@@ -1,0 +1,24 @@
+{
+  "RuralProducers": [
+    {
+      "document": {
+        "type": "CPF",
+        "number": "10697061914"
+      },
+      "farm": {
+        "label": "Fazendinha",
+        "acres": 100,
+        "usefulArea": 70,
+        "notUsefulArea": 30,
+        "Culturas": [
+          "Soja",
+          "Milho"
+        ],
+        "address": {
+          "city": "Itajaí",
+          "state": "Santa Catarina"
+        }
+      }
+    }
+  ]
+}

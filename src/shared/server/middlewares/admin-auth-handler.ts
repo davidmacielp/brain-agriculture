@@ -4,7 +4,7 @@ import { RequestHandler } from "express";
 import { container } from "tsyringe";
 import { AppError } from "../errors/app.error";
 
-export const adminAuthHandler: RequestHandler = async (req, res, next) => {
+export const adminAuthHandler: RequestHandler = async (req, _, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) throw AppError.invalidToken();

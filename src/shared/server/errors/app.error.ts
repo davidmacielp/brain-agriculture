@@ -29,6 +29,14 @@ export class AppError {
     });
   }
 
+  static areaInconsistency(): AppError {
+    return new AppError({
+      statusCode: 403,
+      errorCode: "AREA_INCONSISTENCY",
+      details: `The sum of the useful and non-useful area can't be greater than the total area.`,
+    });
+  }
+
   static invalidToken(): AppError {
     return new AppError({
       statusCode: 401,
