@@ -1,8 +1,8 @@
 import { AdminsRepository } from "@modules/admins/contracts/repositories/admins.repository";
+import { Culture } from "@modules/cultures/contracts/entities/culture";
+import { CulturesRepository } from "@modules/cultures/contracts/repositories/cultures.repository";
 import { AppError } from "@shared/server/errors/app.error";
 import { inject, injectable } from "tsyringe";
-import { Culture } from "../contracts/entities/culture";
-import { CulturesRepository } from "../contracts/repositories/cultures.repository";
 
 interface Request {
   adminId: string;

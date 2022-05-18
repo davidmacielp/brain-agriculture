@@ -1,10 +1,10 @@
 import { FakeAdminsRepository } from "@modules/admins/implementations/fake/repositories/fake-admins.repository";
+import { FakeCulturesRepository } from "@modules/cultures/implementations/fake/repositories/fake-cultures.repository";
 import { AppError } from "@shared/server/errors/app.error";
 import "reflect-metadata";
-import { FakeCulturesRepository } from "../implementations/fake/repositories/fake-cultures.repository";
 import { CreateCultureService } from "./create-culture.service";
 
-describe("Create Rural Producer", () => {
+describe("Create Culture", () => {
   let createCultureService: CreateCultureService;
   let adminsRepository: FakeAdminsRepository;
   let fakeCulturesRepository: FakeCulturesRepository;
