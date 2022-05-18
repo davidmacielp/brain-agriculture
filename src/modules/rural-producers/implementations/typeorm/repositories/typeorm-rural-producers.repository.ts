@@ -1,4 +1,6 @@
 import { CreateRuralProducerDto } from "@modules/rural-producers/contracts/dtos/create-rural-producer.dto";
+import { DeleteRuralProducerDto } from "@modules/rural-producers/contracts/dtos/delete-rural-producer.dto";
+import { FindRuralProducerDto } from "@modules/rural-producers/contracts/dtos/find-rural-producer.dto";
 import { FindRuralProducersDto } from "@modules/rural-producers/contracts/dtos/find-rural-producers.dto";
 import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
 import { RuralProducersRepository } from "@modules/rural-producers/contracts/repositories/rural-producers.repository";
@@ -29,6 +31,13 @@ export class TypeOrmRuralProducersRepository
     });
 
     return ruralProducers;
+  }
+
+  findOne(data: FindRuralProducerDto): Promise<RuralProducer | undefined> {
+    throw new Error("Method not implemented.");
+  }
+  delete(data: DeleteRuralProducerDto): Promise<void> {
+    throw new Error("Method not implemented.");
   }
 
   async save(data: RuralProducer): Promise<void> {

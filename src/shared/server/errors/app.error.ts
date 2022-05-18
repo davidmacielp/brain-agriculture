@@ -21,6 +21,14 @@ export class AppError {
     });
   }
 
+  static ruralProducerNotFound(id: string): AppError {
+    return new AppError({
+      statusCode: 404,
+      errorCode: "RURAL_PRODUCER_NOT_FOUND",
+      details: `We can't found an ruralProducer with id: ${id}`,
+    });
+  }
+
   static notAllowed(): AppError {
     return new AppError({
       statusCode: 403,

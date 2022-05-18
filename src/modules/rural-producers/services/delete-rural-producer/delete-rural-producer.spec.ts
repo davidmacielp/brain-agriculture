@@ -2,19 +2,19 @@ import "reflect-metadata";
 import { FakeAdminsRepository } from "@modules/admins/implementations/fake/repositories/fake-admins.repository";
 import { FakeRuralProducersRepository } from "@modules/rural-producers/implementations/fake/repositories/fake-rural-producers.repository";
 import { AppError } from "@shared/server/errors/app.error";
-import { ListRuralProducersService } from "./list-rural-producers.service";
 import { Address } from "@modules/rural-producers/contracts/entities/address";
 import { Farm } from "@modules/rural-producers/contracts/entities/farm";
+import { DeleteRuralProducersService } from "./delete-rural-producer.service";
 
-describe("List Rural Producers", () => {
-  let listRuralProducersService: ListRuralProducersService;
+describe("Delete Rural Producer", () => {
+  let deleteRuralProducersService: DeleteRuralProducersService;
   let adminsRepository: FakeAdminsRepository;
   let ruralProducersRepository: FakeRuralProducersRepository;
 
   beforeEach(() => {
     adminsRepository = new FakeAdminsRepository();
     ruralProducersRepository = new FakeRuralProducersRepository();
-    listRuralProducersService = new ListRuralProducersService(
+    deleteRuralProducersService = new DeleteRuralProducersService(
       adminsRepository,
       ruralProducersRepository
     );
@@ -23,7 +23,7 @@ describe("List Rural Producers", () => {
     jest.setSystemTime(new Date(2022, 3, 3));
   });
 
-  it("should list all rural producers", async () => {
+  it("should delete a rural producers", async () => {
     const admin = adminsRepository.create({
       email: "fake@admin.com",
       password: "123",
@@ -72,14 +72,19 @@ describe("List Rural Producers", () => {
     await ruralProducersRepository.save(ruralProducer1);
     await ruralProducersRepository.save(ruralProducer2);
 
-    const ruralProducers = await listRuralProducersService.execute({
+    await deleteRuralProducersService.execute({
+      adminId: admin.id,
+      ruralProducerId: ruralProducer1.id,
+    });
+
+    const ruralProducers = await ruralProducersRepository.find({
       adminId: admin.id,
     });
 
-    expect(ruralProducers).toEqual([ruralProducer1, ruralProducer2]);
+    expect(ruralProducers).toEqual([ruralProducer2]);
   });
 
-  it("should not list rural producers if admin doesn't exsist", async () => {
+  it("should not delete rural producers if admin doesn't exsist", async () => {
     const email = "fake@email.com";
     const admin = adminsRepository.create({
       email,
@@ -89,9 +94,27 @@ describe("List Rural Producers", () => {
     await adminsRepository.save(admin);
 
     await expect(
-      listRuralProducersService.execute({
+      deleteRuralProducersService.execute({
         adminId: "fake id",
+        ruralProducerId: "fake id",
       })
     ).rejects.toEqual(AppError.notAllowed());
+  });
+
+  it("should not delete rural producers if it doesn't exsist", async () => {
+    const email = "fake@email.com";
+    const admin = adminsRepository.create({
+      email,
+      password: "123",
+    });
+
+    await adminsRepository.save(admin);
+
+    await expect(
+      deleteRuralProducersService.execute({
+        adminId: admin.id,
+        ruralProducerId: "fake id",
+      })
+    ).rejects.toEqual(AppError.ruralProducerNotFound("fake id"));
   });
 });

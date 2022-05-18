@@ -42,8 +42,6 @@ export class CreateRuralProducerService {
 
     if (!admin) throw AppError.notAllowed();
 
-    console.log(farm);
-
     if (farm.usefulArea + farm.notUsefulArea > farm.totalArea)
       throw AppError.inconsistencyArea();
 
