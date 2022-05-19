@@ -4,7 +4,7 @@ import { TypeOrmRuralProducer } from "@modules/rural-producers/implementations/t
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 } from "uuid";
 
-@Entity("Admin")
+@Entity("admins")
 export class TypeOrmAdmin implements Admin {
   @PrimaryColumn()
   id: string;

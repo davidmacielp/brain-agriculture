@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity("Culture")
+@Entity("cultures")
 export class TypeOrmCulture implements Culture {
   @PrimaryGeneratedColumn("uuid")
   id: string;

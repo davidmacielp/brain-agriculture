@@ -12,7 +12,7 @@ import {
 import { TypeOrmAddress } from "./typeorm-address";
 import { TypeOrmRuralProducer } from "./typeorm-rural-producer";
 
-@Entity("Farm")
+@Entity("farms")
 export class TypeOrmFarm implements Farm {
   @PrimaryColumn()
   id: string;

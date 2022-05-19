@@ -32,12 +32,26 @@ export class TypeOrmRuralProducersRepository
     return ruralProducers;
   }
 
-  farmCount(adminId: string): Promise<number> {
-    throw new Error("Method not implemented.");
+  async farmCount(adminId: string): Promise<number> {
+    const farmCount = await this.repository.count({
+      where: {
+        createdBy: adminId,
+      },
+    });
+
+    return farmCount;
   }
 
-  farmArea(adminId: string): Promise<number> {
-    throw new Error("Method not implemented.");
+  async farmArea(adminId: string): Promise<number> {
+    console.log(adminId);
+    const result = await this.repository
+      .createQueryBuilder("rural_producers")
+      .leftJoinAndSelect("rural_producers.farm", "farms")
+      .where("rural_producers.createdBy = :id", { id: adminId })
+      .select("SUM(farms.totalArea)", "sum")
+      .getRawOne();
+
+    return Number(result.sum);
   }
 
   async findOne(

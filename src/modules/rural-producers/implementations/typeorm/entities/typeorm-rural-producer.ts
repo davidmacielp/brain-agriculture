@@ -14,7 +14,7 @@ import {
 } from "typeorm";
 import { TypeOrmFarm } from "./typeorm-farm";
 
-@Entity("RuralProducer")
+@Entity("rural_producers")
 export class TypeOrmRuralProducer implements RuralProducer {
   @PrimaryGeneratedColumn("uuid")
   id: string;

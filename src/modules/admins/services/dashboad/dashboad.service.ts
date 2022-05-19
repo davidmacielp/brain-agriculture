@@ -17,7 +17,9 @@ export class DashboardService {
     private ruralProducersRepository: RuralProducersRepository
   ) {}
 
-  async execute({ adminId }: Request): Promise<any> {
+  async execute({
+    adminId,
+  }: Request): Promise<{ totalFarmArea: number; totalFarmCount: number }> {
     const admin = await this.adminsRepository.findOne({ id: adminId });
 
     if (!admin) throw AppError.notAllowed();
@@ -25,6 +27,7 @@ export class DashboardService {
     const totalFarmCount = await this.ruralProducersRepository.farmCount(
       adminId
     );
+
     const totalFarmArea = await this.ruralProducersRepository.farmArea(adminId);
 
     return { totalFarmArea, totalFarmCount };
