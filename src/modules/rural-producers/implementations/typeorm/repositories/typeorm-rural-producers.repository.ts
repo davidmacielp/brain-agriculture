@@ -39,7 +39,7 @@ export class TypeOrmRuralProducersRepository
       where: {
         id: data.id,
       },
-      // relations: ["farm", "farm.address", "farm.cultures"],
+      relations: ["farm", "farm.address", "farm.cultures"],
     });
 
     return ruralProducer ? ruralProducer : undefined;

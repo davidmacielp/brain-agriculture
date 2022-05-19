@@ -1,13 +1,9 @@
 import { AdminsRepository } from "@modules/admins/contracts/repositories/admins.repository";
-import { Culture } from "@modules/cultures/contracts/entities/culture";
 import { CulturesRepository } from "@modules/cultures/contracts/repositories/cultures.repository";
-import { Address } from "@modules/rural-producers/contracts/entities/address";
-import { Farm } from "@modules/rural-producers/contracts/entities/farm";
 import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
 import { RuralProducersRepository } from "@modules/rural-producers/contracts/repositories/rural-producers.repository";
 import { AppError } from "@shared/server/errors/app.error";
 import { inject, injectable } from "tsyringe";
-import { ConnectionIsNotSetError, ObjectIdColumn } from "typeorm";
 
 interface Request {
   adminId: string;

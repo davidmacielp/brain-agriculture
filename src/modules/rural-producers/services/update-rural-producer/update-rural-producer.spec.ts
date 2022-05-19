@@ -90,8 +90,6 @@ describe("Update Rural Producer", () => {
       },
     });
 
-    console.log(updatedRuralProducer);
-
     expect(updatedRuralProducer).toEqual({
       id: ruralProducer1.id,
       document: {

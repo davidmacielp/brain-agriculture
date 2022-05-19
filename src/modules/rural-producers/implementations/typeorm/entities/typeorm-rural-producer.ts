@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -21,7 +22,6 @@ export class TypeOrmRuralProducer implements RuralProducer {
   @OneToOne(() => TypeOrmFarm, (farm) => farm.ruralProducer, {
     cascade: true,
   })
-  @JoinColumn()
   farm: TypeOrmFarm;
 
   @Column({ type: "json" })
@@ -33,6 +33,7 @@ export class TypeOrmRuralProducer implements RuralProducer {
   @ManyToOne(() => TypeOrmAdmin, (admin) => admin.ruralProducers, {
     cascade: true,
   })
+  @JoinColumn({ name: "createdBy", referencedColumnName: "id" })
   admin: TypeOrmAdmin;
 
   @CreateDateColumn()

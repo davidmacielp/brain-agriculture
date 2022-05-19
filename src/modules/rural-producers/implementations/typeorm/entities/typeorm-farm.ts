@@ -20,7 +20,10 @@ export class TypeOrmFarm implements Farm {
   @Column()
   label: string;
 
-  @OneToOne(() => TypeOrmRuralProducer, (ruralProducer) => ruralProducer.farm)
+  @OneToOne(() => TypeOrmRuralProducer, (ruralProducer) => ruralProducer.farm, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn()
   ruralProducer: TypeOrmRuralProducer;
 
   @Column()
@@ -32,8 +35,9 @@ export class TypeOrmFarm implements Farm {
   @Column()
   notUsefulArea: number;
 
-  @OneToOne(() => TypeOrmAddress, (address) => address.id, { cascade: true })
-  @JoinColumn()
+  @OneToOne(() => TypeOrmAddress, (address) => address.farm, {
+    cascade: true,
+  })
   address: TypeOrmAddress;
 
   @ManyToMany(() => TypeOrmCulture, (culture) => culture.farms)

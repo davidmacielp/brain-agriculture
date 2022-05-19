@@ -12,10 +12,7 @@ export class TypeOrmAdmin implements Admin {
   @Column({ unique: true })
   email: string;
 
-  @OneToMany(
-    () => TypeOrmRuralProducer,
-    (ruralProducer) => ruralProducer.createdBy
-  )
+  @OneToMany(() => TypeOrmRuralProducer, (ruralProducer) => ruralProducer.admin)
   ruralProducers: TypeOrmRuralProducer[];
 
   @Column()

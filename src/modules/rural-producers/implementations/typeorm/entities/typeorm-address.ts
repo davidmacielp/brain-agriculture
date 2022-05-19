@@ -1,5 +1,6 @@
 import { Address } from "@modules/rural-producers/contracts/entities/address";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
+import { TypeOrmFarm } from "./typeorm-farm";
 
 @Entity({ name: "Address" })
 export class TypeOrmAddress implements Address {
@@ -11,6 +12,10 @@ export class TypeOrmAddress implements Address {
 
   @Column()
   state: string;
+
+  @OneToOne(() => TypeOrmFarm, (farm) => farm.address, { onDelete: "CASCADE" })
+  @JoinColumn()
+  farm: TypeOrmFarm;
 
   @Column()
   createdAt: Date;

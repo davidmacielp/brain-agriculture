@@ -1,5 +1,4 @@
 import { AdminsRepository } from "@modules/admins/contracts/repositories/admins.repository";
-import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
 import { RuralProducersRepository } from "@modules/rural-producers/contracts/repositories/rural-producers.repository";
 import { AppError } from "@shared/server/errors/app.error";
 import { inject, injectable } from "tsyringe";
@@ -10,7 +9,7 @@ interface Request {
 }
 
 @injectable()
-export class DeleteRuralProducersService {
+export class DeleteRuralProducerService {
   constructor(
     @inject("AdminsRepository")
     private adminsRepository: AdminsRepository,
