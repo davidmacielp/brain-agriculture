@@ -36,7 +36,7 @@ describe("List Cultures", () => {
 
     const culture2 = culturesRepository.create({
       createdBy: admin.id,
-      label: "Açucar",
+      label: "Café",
     });
 
     await culturesRepository.save(culture1);

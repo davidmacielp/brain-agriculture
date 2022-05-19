@@ -49,9 +49,10 @@ export class CreateRuralProducerService {
     if (farm.usefulArea + farm.notUsefulArea > farm.totalArea)
       throw AppError.inconsistencyArea();
 
-    const cultures = farm.cultures
-      ? await this.culturesRepository.find({ adminId, ids: farm.cultures })
-      : [];
+    const cultures =
+      farm.cultures && farm.cultures.length > 0
+        ? await this.culturesRepository.find({ adminId, ids: farm.cultures })
+        : [];
 
     const farmAddress = new Address(farm.address);
 

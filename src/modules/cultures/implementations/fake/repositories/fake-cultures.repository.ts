@@ -12,9 +12,17 @@ export class FakeCulturesRepository implements CulturesRepository {
   }
 
   async find(data: FindCultureDto): Promise<Culture[]> {
-    return this.cultures.filter(
+    let response = this.cultures.filter(
       (ruralProducer) => ruralProducer.createdBy === data.adminId
     );
+
+    if (data.ids) {
+      response = response.filter((ruralProducer) =>
+        data.ids?.includes(ruralProducer.id)
+      );
+    }
+
+    return response;
   }
 
   async save(data: Culture): Promise<void> {

@@ -4,18 +4,21 @@ import { CreateRuralProducerService } from "./create-rural-producer.service";
 import { FakeRuralProducersRepository } from "@modules/rural-producers/implementations/fake/repositories/fake-rural-producers.repository";
 import { RuralProducer } from "@modules/rural-producers/contracts/entities/rural-producer";
 import { AppError } from "@shared/server/errors/app.error";
+import { FakeCulturesRepository } from "@modules/cultures/implementations/fake/repositories/fake-cultures.repository";
 
 describe("Create Rural Producer", () => {
   let createRuralProducerService: CreateRuralProducerService;
   let adminsRepository: FakeAdminsRepository;
   let fakeRuralProducersRepository: FakeRuralProducersRepository;
+  let culturesRepository: FakeCulturesRepository;
 
   beforeEach(() => {
     adminsRepository = new FakeAdminsRepository();
     fakeRuralProducersRepository = new FakeRuralProducersRepository();
     createRuralProducerService = new CreateRuralProducerService(
       adminsRepository,
-      fakeRuralProducersRepository
+      fakeRuralProducersRepository,
+      culturesRepository
     );
 
     jest.useFakeTimers("modern");
