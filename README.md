@@ -28,6 +28,7 @@ que utilizo e pensamento lógico na criação da aplicação.
 
 #### ADMINS -> Pode criar, editar, deletar, listar produtores rurais.
 #### CULTURES -> Admins podem criar listar culturas.
+#### DASHBOARD -> Admins podem visualizar informações da dashboard.
 
 ### PASSO A PASSO PARA INICIAR A APLICAÇÃO
 ##### Foi utilizado yarn como gerenciador de pacotes, logo para instalação:
