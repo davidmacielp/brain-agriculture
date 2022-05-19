@@ -1,12 +1,18 @@
 import { Admin } from "@modules/admins/contracts/entities/admin";
 import { CreateAdminDto } from "@modules/admins/contracts/interfaces/create-admin.dto";
 import { TypeOrmRuralProducer } from "@modules/rural-producers/implementations/typeorm/entities/typeorm-rural-producer";
-import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
-import { v4 } from "uuid";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
 @Entity("admins")
 export class TypeOrmAdmin implements Admin {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ unique: true })
@@ -18,19 +24,16 @@ export class TypeOrmAdmin implements Admin {
   @Column()
   password: string;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 
   constructor(data: CreateAdminDto) {
     if (data) {
-      this.id = v4();
       this.email = data.email;
       this.password = data.password;
-      this.createdAt = new Date();
-      this.updatedAt = new Date();
     }
   }
 }

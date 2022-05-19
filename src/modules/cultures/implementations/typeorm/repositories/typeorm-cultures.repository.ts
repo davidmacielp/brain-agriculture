@@ -4,7 +4,7 @@ import { Culture } from "@modules/cultures/contracts/entities/culture";
 import { CulturesRepository } from "@modules/cultures/contracts/repositories/cultures.repository";
 import { TypeOrmProvider } from "@providers/orm/implementations/typeorm/typeorm.provider";
 import { container } from "tsyringe";
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { TypeOrmCulture } from "../entities/typeorm-culture";
 
 export class TypeOrmCulturesRepository implements CulturesRepository {
@@ -15,10 +15,11 @@ export class TypeOrmCulturesRepository implements CulturesRepository {
       .resolve<TypeOrmProvider>("OrmProvider")
       .appDataSource.getRepository(TypeOrmCulture);
   }
-  async find({ adminId }: FindCultureDto): Promise<Culture[]> {
+  async find({ adminId, ids }: FindCultureDto): Promise<Culture[]> {
     const cultures = await this.repository.find({
       where: {
         createdBy: adminId,
+        ...(ids && { id: In(ids) }),
       },
     });
 

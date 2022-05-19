@@ -1,4 +1,3 @@
-import { CreateCultureDto } from "@modules/cultures/contracts/dtos/create-culture.dto";
 import { Culture } from "@modules/cultures/contracts/entities/culture";
 import { TypeOrmFarm } from "@modules/rural-producers/implementations/typeorm/entities/typeorm-farm";
 import {
@@ -29,11 +28,4 @@ export class TypeOrmCulture implements Culture {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  constructor(data: CreateCultureDto) {
-    if (data) {
-      this.label = data.label;
-      this.createdBy = data.createdBy;
-    }
-  }
 }

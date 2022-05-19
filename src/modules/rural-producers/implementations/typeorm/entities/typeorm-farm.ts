@@ -2,19 +2,21 @@ import { TypeOrmCulture } from "@modules/cultures/implementations/typeorm/entiti
 import { Farm } from "@modules/rural-producers/contracts/entities/farm";
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   JoinTable,
   ManyToMany,
   OneToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { TypeOrmAddress } from "./typeorm-address";
 import { TypeOrmRuralProducer } from "./typeorm-rural-producer";
 
 @Entity("farms")
 export class TypeOrmFarm implements Farm {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -44,9 +46,9 @@ export class TypeOrmFarm implements Farm {
   @JoinTable()
   cultures: TypeOrmCulture[];
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 }

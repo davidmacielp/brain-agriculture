@@ -1,10 +1,18 @@
 import { Address } from "@modules/rural-producers/contracts/entities/address";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { TypeOrmFarm } from "./typeorm-farm";
 
 @Entity({ name: "addresses" })
 export class TypeOrmAddress implements Address {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -17,9 +25,9 @@ export class TypeOrmAddress implements Address {
   @JoinColumn()
   farm: TypeOrmFarm;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 }

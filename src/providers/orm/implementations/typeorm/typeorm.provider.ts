@@ -1,4 +1,3 @@
-import { appConfig } from "@config/app.config";
 import { postgresConfig } from "@config/postgres.config";
 import { TypeOrmAdmin } from "@modules/admins/implementations/typeorm/entities/typeorm-admin";
 import { TypeOrmCulture } from "@modules/cultures/implementations/typeorm/entities/typeorm-culture";
