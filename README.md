@@ -26,9 +26,9 @@ que utilizo e pensamento lógico na criação da aplicação.
  
 ### PRINCIPAIS MÓDULOS:
 
-#### ADMINS -> Pode criar, editar, deletar, listar produtores rurais.
-#### CULTURES -> Admins podem criar listar culturas.
-#### DASHBOARD -> Admins podem visualizar informações da dashboard.
+#### ADMINS -> Podem criar, se authenticar e visualizar informações da dashboard.
+#### CULTURES -> Podem ser criados listados por admins.
+#### RURAL PRODUCERS -> Podem ser criados, editados listados e deletados.
 
 ### PASSO A PASSO PARA INICIAR A APLICAÇÃO
 ##### Foi utilizado yarn como gerenciador de pacotes, logo para instalação:
