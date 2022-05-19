@@ -24,6 +24,22 @@ export class FakeRuralProducersRepository implements RuralProducersRepository {
     this.ruralProducers.push(data);
   }
 
+  async farmCount(adminId: string): Promise<number> {
+    const farmCount = this.ruralProducers.filter(
+      (ruralProducer) => ruralProducer.createdBy === adminId
+    ).length;
+
+    return farmCount;
+  }
+
+  async farmArea(adminId: string): Promise<number> {
+    const farmArea = this.ruralProducers
+      .filter((ruralProducer) => ruralProducer.createdBy === adminId)
+      .reduce((a, b) => a + b.farm.totalArea, 0);
+
+    return farmArea;
+  }
+
   async findOne(
     data: FindRuralProducerDto
   ): Promise<RuralProducer | undefined> {

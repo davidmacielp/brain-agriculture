@@ -32,6 +32,14 @@ export class TypeOrmRuralProducersRepository
     return ruralProducers;
   }
 
+  farmCount(adminId: string): Promise<number> {
+    throw new Error("Method not implemented.");
+  }
+
+  farmArea(adminId: string): Promise<number> {
+    throw new Error("Method not implemented.");
+  }
+
   async findOne(
     data: FindRuralProducerDto
   ): Promise<RuralProducer | undefined> {

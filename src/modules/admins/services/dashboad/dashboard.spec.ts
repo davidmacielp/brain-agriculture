@@ -4,17 +4,17 @@ import { FakeRuralProducersRepository } from "@modules/rural-producers/implement
 import { AppError } from "@shared/server/errors/app.error";
 import { Address } from "@modules/rural-producers/contracts/entities/address";
 import { Farm } from "@modules/rural-producers/contracts/entities/farm";
-import { DeleteRuralProducerService } from "./delete-rural-producer.service";
+import { DashboardService } from "./dashboad.service";
 
-describe("Delete Rural Producer", () => {
-  let deleteRuralProducerService: DeleteRuralProducerService;
+describe("Dashboad Info", () => {
+  let dashboardService: DashboardService;
   let adminsRepository: FakeAdminsRepository;
   let ruralProducersRepository: FakeRuralProducersRepository;
 
   beforeEach(() => {
     adminsRepository = new FakeAdminsRepository();
     ruralProducersRepository = new FakeRuralProducersRepository();
-    deleteRuralProducerService = new DeleteRuralProducerService(
+    dashboardService = new DashboardService(
       adminsRepository,
       ruralProducersRepository
     );
@@ -23,7 +23,7 @@ describe("Delete Rural Producer", () => {
     jest.setSystemTime(new Date(2022, 3, 3));
   });
 
-  it("should delete a rural producers", async () => {
+  it("should return dashboard info", async () => {
     const admin = adminsRepository.create({
       email: "fake@admin.com",
       password: "123",
@@ -72,19 +72,14 @@ describe("Delete Rural Producer", () => {
     await ruralProducersRepository.save(ruralProducer1);
     await ruralProducersRepository.save(ruralProducer2);
 
-    await deleteRuralProducerService.execute({
-      adminId: admin.id,
-      ruralProducerId: ruralProducer1.id,
-    });
-
-    const ruralProducers = await ruralProducersRepository.find({
+    const ruralProducers = await dashboardService.execute({
       adminId: admin.id,
     });
 
-    expect(ruralProducers).toEqual([ruralProducer2]);
+    expect(ruralProducers).toEqual({ totalFarmArea: 60, totalFarmCount: 2 });
   });
 
-  it("should not delete rural producers if admin doesn't exsist", async () => {
+  it("should not return dashboard info if admin doesn't exsist", async () => {
     const email = "fake@email.com";
     const admin = adminsRepository.create({
       email,
@@ -94,27 +89,9 @@ describe("Delete Rural Producer", () => {
     await adminsRepository.save(admin);
 
     await expect(
-      deleteRuralProducerService.execute({
+      dashboardService.execute({
         adminId: "fake id",
-        ruralProducerId: "fake id",
       })
     ).rejects.toEqual(AppError.notAllowed());
-  });
-
-  it("should not delete rural producers if it doesn't exsist", async () => {
-    const email = "fake@email.com";
-    const admin = adminsRepository.create({
-      email,
-      password: "123",
-    });
-
-    await adminsRepository.save(admin);
-
-    await expect(
-      deleteRuralProducerService.execute({
-        adminId: admin.id,
-        ruralProducerId: "fake id",
-      })
-    ).rejects.toEqual(AppError.ruralProducerNotFound("fake id"));
   });
 });
